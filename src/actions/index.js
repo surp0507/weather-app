@@ -8,7 +8,7 @@ export const  loginAction=(login)=>{
 
 }
 
-const validAction=(users)=>{
+export const validAction=(users)=>{
   return{
     type:types.VALID_LOGIN,
     users

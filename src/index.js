@@ -4,7 +4,6 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import reducer from './reducers'
-import {logData, weatherAction} from './actions'
 import App from './containers/App'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,7 +15,6 @@ const store = createStore(
   applyMiddleware(thunk)
 )
 
-store.dispatch(logData())
 
 
 render(

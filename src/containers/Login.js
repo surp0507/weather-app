@@ -1,19 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import {Button,Modal} from 'react-bootstrap';
 import { useSelector,useDispatch } from 'react-redux';
 import { loginAction,getUsername,getPassword } from '../actions';
+import { logData } from '../actions';
+
 
 
 
 
 export default function Login() {
+  const [lang,setlang]=useState('')
+  const [long,setlong]=useState('')
  
   let navigate=useNavigate()
   const show=useSelector(state=>state.loginReducer.show)
   const username=useSelector(state=>state.loginReducer.username)
   const password=useSelector(state=>state.loginReducer.password)
   const users=useSelector(state=>state.loginReducer.users)
+
   const dispatch=useDispatch();
 
 
@@ -24,9 +29,31 @@ export default function Login() {
     dispatch(loginAction(true));
   }
 
+  useEffect(()=>{
+    dispatch(logData())
+  },[])
+
+const getLocation=()=>{
+  if(navigator.geolocation){
+   navigator.geolocation.getCurrentPosition(showPosition);
+
+  }
+
+}
+const showPosition=(position)=>{
+  setlang(position.coords.latitude)
+  setlong(position.coords.longitude)
+
+
+}
+console.log(lang);
+console.log(long);
 
 
   const loginValidation=(ausername,apassword)=>{
+
+    getLocation();
+    
     if(username===ausername && password===apassword){
   
     navigate("/dashboard")
@@ -45,6 +72,7 @@ export default function Login() {
       <Button variant="primary" onClick={handleShow}>
         Login
       </Button>
+
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header >
