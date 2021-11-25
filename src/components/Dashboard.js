@@ -15,13 +15,16 @@ import { useNavigate } from 'react-router-dom';
    const dispatch=useDispatch();
 
   const submit=()=>{
+    let data;
     dispatch(getWeather(cityname));
-    localStorage.setItem("")
   }
 
   const historyPage=()=>{
     navigate("/history")
   }
+
+
+ 
  
 return (
    <>
@@ -49,6 +52,10 @@ return (
            Name:<span key={item.id}>{item.name}</span> <br/><br/>
            Speed:<span >{item.wind.speed}</span><br/><br/>
            Deg:<span>{item.wind.deg}</span><br/><br/>
+           {localStorage.setItem("name",item.name),
+            localStorage.setItem("speed",item.wind.speed),
+            localStorage.setItem("Deg",item.wind.deg)
+           }
          </div>
        </>
      ))}

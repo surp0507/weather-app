@@ -6,9 +6,6 @@ import { loginAction,getUsername,getPassword } from '../actions';
 import { logData } from '../actions';
 
 
-
-
-
 export default function Login() {
   const [lang,setlang]=useState('')
   const [long,setlong]=useState('')
@@ -43,26 +40,17 @@ const getLocation=()=>{
 const showPosition=(position)=>{
   setlang(position.coords.latitude)
   setlong(position.coords.longitude)
-
-
 }
-console.log(lang);
-console.log(long);
 
-
-  const loginValidation=(ausername,apassword)=>{
-
-    getLocation();
-    
-    if(username===ausername && password===apassword){
-  
-    navigate("/dashboard")
+ const loginValidation=(ausername,apassword)=>{
+   getLocation();
+   if(username===ausername && password===apassword){
+   navigate("/dashboard")
   }
   else{
     alert("incorrect")
     handleClose();
   }
-
   }
 
   return (
@@ -87,7 +75,7 @@ console.log(long);
             onChange={(e)=>dispatch(getUsername(e.target.value))}
           />
           <input 
-            type="text" 
+            type="password" 
             placeholder="password"  
             onChange={(e)=>dispatch(getPassword(e.target.value))}
           />
