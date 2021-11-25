@@ -3,8 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {Button,Modal} from 'react-bootstrap';
 import { useSelector,useDispatch } from 'react-redux';
 import { loginAction,getUsername,getPassword } from '../actions';
-import {useEffect} from 'react'
-import getWeather from '../thunk/getWeather';
+
 
 
 
@@ -25,12 +24,6 @@ export default function Login() {
     dispatch(loginAction(true));
   }
 
-useEffect(() => {
-  
-  dispatch(getWeather())
-
-
-}, [])
 
 
   const loginValidation=(ausername,apassword)=>{

@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux'
-
+import { weatherReducer } from './weatherReducer';
 import { loginReducer } from './LoginReducer'
 
-export const reducer=combineReducers({
-  loginReducer
+const reducer=combineReducers({
+  loginReducer,
+  weatherReducer
 })
 export default reducer;
