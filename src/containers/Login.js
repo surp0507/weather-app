@@ -29,8 +29,7 @@ export default function Login() {
   const loginValidation=(ausername,apassword)=>{
     if(username===ausername && password===apassword){
   
-    alert("correct")
-    navigate("/logout")
+    navigate("/dashboard")
   }
   else{
     alert("incorrect")
@@ -38,25 +37,10 @@ export default function Login() {
   }
 
   }
-  const productPage=()=>{
 
-  }
-
-  const cartPage=()=>{
-
-  }
-
-  const historyPage=()=>{
-
-  }
-
-  const publicPage=()=>{
-
-  }
   return (
     <div>
         <h2  className="text-center">Weather-API</h2>
-       
         <hr />
       <Button variant="primary" onClick={handleShow}>
         Login
