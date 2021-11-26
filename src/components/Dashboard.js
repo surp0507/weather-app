@@ -1,36 +1,38 @@
 import { Link } from 'react-router-dom';
-
+import { useEffect, useState } from 'react';                                                                                                                                                                           
 import {Button} from 'react-bootstrap'
 import { getCityName } from '../actions';
 import { useSelector,useDispatch } from 'react-redux';
 import getWeather from '../thunk/getWeather'
 import { useNavigate } from 'react-router-dom';
+import { getHistory } from '../actions';
 
 
   export default function Dashboard() {
-   const navigate=useNavigate()
-   const weather=useSelector(state=>state.weatherReducer.weather)
-   console.log(weather);
-   const cityname=useSelector(state=>state.weatherReducer.cityName)
-   const dispatch=useDispatch();
+    const navigate=useNavigate()
+    const weather=useSelector(state=>state.weatherReducer.weather)
+    const lang=useSelector(state=>state.langTut.lang)
+    const long=useSelector(state=>state.langTut.long)
+    console.log(lang)
+    console.log(long)
+    const history=useSelector(state=>state.historyReducer.data)
+    console.log(weather);
+    const cityname=useSelector(state=>state.weatherReducer.cityName)
+    const dispatch=useDispatch();
+  
+    const submit=()=>{
+      dispatch(getWeather(cityname));
+    }
 
-  const submit=()=>{
-    let data;
-    dispatch(getWeather(cityname));
-  }
+    const historyPage=()=>{
+      navigate("/history")
+    }
 
-  const historyPage=()=>{
-    navigate("/history")
-  }
-
-
- 
- 
-return (
+  return (
    <>
     <Link to="/dashboard">
       <Button className="mx-1 my-2 btn-sm">
-        ashboard
+        Dashboard
       </Button>
     </Link> 
     <Button onClick={historyPage} className="mx-2 btn-sm">history</Button>
@@ -47,17 +49,21 @@ return (
      <Button onClick={submit} className="mx-1 btn btn-sm">search</Button>
      <hr/>
      {weather.map(item=>(
+
        <>
-         <div className="text-center">
+         <div className="text-center my-5">
+           <hr/>
            Name:<span key={item.id}>{item.name}</span> <br/><br/>
-           Speed:<span >{item.wind.speed}</span><br/><br/>
+           Speed:<span >{item.wind.speed}</span><br/><br/>   
            Deg:<span>{item.wind.deg}</span><br/><br/>
-           {localStorage.setItem("name",item.name),
-            localStorage.setItem("speed",item.wind.speed),
-            localStorage.setItem("Deg",item.wind.deg)
+           {localStorage.setItem("city",item.name),
+           localStorage.setItem("speed",item.wind.speed),
+          localStorage.setItem("deg",item.wind.deg)
            }
+           <hr/>
          </div>
        </>
+       
      ))}
   </>
  )

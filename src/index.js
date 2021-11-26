@@ -7,20 +7,14 @@ import reducer from './reducers'
 import App from './containers/App'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-
 const store = createStore(
   reducer,
   applyMiddleware(thunk)
 )
 
-
-
 render(
   <Provider store={store}>
     <App />
- 
   </Provider>,
   document.getElementById('root')
 )

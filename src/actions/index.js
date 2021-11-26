@@ -54,4 +54,29 @@ export const logData=()=>{
     }
   }
 
+  export const getHistory=(history)=>{
+    return{
+      type:types.GET_HISTORY,
+      history
+    }
+  }
+
+  export const getLongitute=(long)=>{
+    return{
+      type:types.GET_LONG,
+      long
+    }
+  }
+
+  export const getLangitute=(lang)=>{
+    return{
+      type:types.GET_LANG,
+      lang
+    }
+  }
+
+
+
+
+
 

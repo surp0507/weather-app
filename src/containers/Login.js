@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router-dom';
 import {Button,Modal} from 'react-bootstrap';
 import { useSelector,useDispatch } from 'react-redux';
-import { loginAction,getUsername,getPassword } from '../actions';
+import { loginAction,getUsername,getPassword, getHistory } from '../actions';
 import { logData } from '../actions';
+import { getLangitute,getLongitute } from '../actions';
 
 
 export default function Login() {
-  const [lang,setlang]=useState('')
-  const [long,setlong]=useState('')
+
  
   let navigate=useNavigate()
   const show=useSelector(state=>state.loginReducer.show)
@@ -38,9 +38,9 @@ const getLocation=()=>{
 
 }
 const showPosition=(position)=>{
-  setlang(position.coords.latitude)
-  setlong(position.coords.longitude)
-}
+  dispatch(getLangitute(position.coords.latitude))
+  dispatch(getLongitute(position.coords.longitude))
+ }
 
  const loginValidation=(ausername,apassword)=>{
    getLocation();
@@ -55,48 +55,45 @@ const showPosition=(position)=>{
 
   return (
     <div>
-        <h2  className="text-center">Weather-API</h2>
-        <hr />
+      <h2  className="text-center my-3">Weather-API</h2>
+      <hr />
       <Button variant="primary" onClick={handleShow}>
         Login
       </Button>
-
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header >
           <Modal.Title>Login Page</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="mx-auto"> 
-          <input 
-            type="text" 
-            placeholder="username" 
-            className="my-3" 
-            onChange={(e)=>dispatch(getUsername(e.target.value))}
-          />
-          <input 
-            type="password" 
-            placeholder="password"  
-            onChange={(e)=>dispatch(getPassword(e.target.value))}
-          />
-          
-         </div>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-         {users.map((item)=>(
-           <>
-         <Button 
-           variant="primary" 
-           onClick={()=>loginValidation(item.username,item.password)}>
-           Login
-         </Button>
-          </>
-          ))}
-      </Modal.Footer>
-    </Modal>
-  </div>
-  )
-}
+            <input 
+              type="text" 
+              placeholder="username" 
+              className="my-3" 
+              onChange={(e)=>dispatch(getUsername(e.target.value))}
+            />
+            <input 
+              type="password" 
+              placeholder="password"  
+              onChange={(e)=>dispatch(getPassword(e.target.value))}
+            />
+          </div>
+          </Modal.Body>
+            <Modal.Footer>
+             <Button variant="secondary" onClick={handleClose}>
+              Close
+             </Button>
+             {users.map((item)=>(
+               <>
+                <Button 
+                  variant="primary" 
+                  onClick={()=>loginValidation(item.username,item.password)}>
+                  Login
+               </Button>
+              </>
+                ))}
+            </Modal.Footer>
+          </Modal>
+       </div>
+      )
+    }
