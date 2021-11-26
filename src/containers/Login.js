@@ -57,23 +57,24 @@ const showPosition=(position)=>{
     <div>
       <h2  className="text-center my-3">Weather-API</h2>
       <hr />
-      <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={handleShow} className="btn">
         Login
       </Button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header >
-          <Modal.Title>Login Page</Modal.Title>
+          <h4>Login Page</h4>
         </Modal.Header>
         <Modal.Body>
           <div className="mx-auto"> 
             <input 
               type="text" 
+              className="mx-5 my-2 text-center"
               placeholder="username" 
-              className="my-3" 
               onChange={(e)=>dispatch(getUsername(e.target.value))}
             />
             <input 
               type="password" 
+              className="mx-5 text-center"
               placeholder="password"  
               onChange={(e)=>dispatch(getPassword(e.target.value))}
             />

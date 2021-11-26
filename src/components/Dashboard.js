@@ -19,7 +19,13 @@ import { getHistory } from '../actions';
     console.log(weather);
     const cityname=useSelector(state=>state.weatherReducer.cityName)
     const dispatch=useDispatch();
-  
+
+
+    useEffect(()=>{
+
+   localStorage.setItem("history",JSON.stringify(history))
+
+    },[])
     const submit=()=>{
       dispatch(getWeather(cityname));
     }
@@ -56,11 +62,15 @@ import { getHistory } from '../actions';
            Name:<span key={item.id}>{item.name}</span> <br/><br/>
            Speed:<span >{item.wind.speed}</span><br/><br/>   
            Deg:<span>{item.wind.deg}</span><br/><br/>
-           {localStorage.setItem("city",item.name),
-           localStorage.setItem("speed",item.wind.speed),
-          localStorage.setItem("deg",item.wind.deg)
-           }
-           <hr/>
+           {
+
+             weather.map((ele=>{
+            const arr=JSON.parse(localStorage.getItem("history"))
+              console.log(arr)
+              localStorage.setItem("arr",JSON.stringify(arr))
+             }))
+            }
+          <hr/>
          </div>
        </>
        
