@@ -9,14 +9,10 @@ import { getHistory } from '../actions';
 
 
   export default function Dashboard() {
+   
     const navigate=useNavigate()
     const weather=useSelector(state=>state.weatherReducer.weather)
-    const lang=useSelector(state=>state.langTut.lang)
-    const long=useSelector(state=>state.langTut.long)
-    console.log(lang)
-    console.log(long)
-    const history=useSelector(state=>state.historyReducer.data)
-    console.log(weather);
+    const history=useSelector(state=>state.historyReducer.history)
     const cityname=useSelector(state=>state.weatherReducer.cityName)
     const dispatch=useDispatch();
 
@@ -25,9 +21,13 @@ import { getHistory } from '../actions';
 
    localStorage.setItem("history",JSON.stringify(history))
 
-    },[])
+    },[history])
     const submit=()=>{
       dispatch(getWeather(cityname));
+      weather.map(ele=>{
+        dispatch(getHistory([...history,{name:ele.name,speed:ele.wind.speed,deg:ele.wind.deg,time:new Date()}]));
+      })
+      
     }
 
     const historyPage=()=>{
@@ -62,18 +62,11 @@ import { getHistory } from '../actions';
            Name:<span key={item.id}>{item.name}</span> <br/><br/>
            Speed:<span >{item.wind.speed}</span><br/><br/>   
            Deg:<span>{item.wind.deg}</span><br/><br/>
-           {
-
-             weather.map((ele=>{
-            const arr=JSON.parse(localStorage.getItem("history"))
-              console.log(arr)
-              localStorage.setItem("arr",JSON.stringify(arr))
-             }))
-            }
-          <hr/>
+           id:<span> {item.id}</span>
+           <hr/>
          </div>
        </>
-       
+  
      ))}
   </>
  )

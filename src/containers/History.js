@@ -3,34 +3,37 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export default function History() {
-    const [name, setname] = useState("");
-    const [speed, setspeed] = useState("");
-    const [Deg, setdeg] = useState("");
+  const newHistory=JSON.parse(localStorage.getItem("history"));
+  console.log(newHistory)
 
-    let data = localStorage.getItem("city")
-    let data1 = localStorage.getItem("speed")
-    let data2 = localStorage.getItem("deg")
-
-    const showData=()=>{
-      setname(data)
-      setspeed(data1)
-      setdeg(data2)
-    }
 
   return (
     <div>
-      <Button onClick={showData} className="btn-sm my-4">show History </Button>
       <Link to="/">
         <Button className="mx-2 btn-sm">
           Logout
         </Button>
       </Link>
       <hr />
-      <h3 className="text-center">history page</h3>
+      <h3 className="text-center">history page</h3> 
+      <hr/>
       <div classname="mx-auto">
-        Name: <span>{name} </span> <br /> <br />
-        Speed:<span>{speed}</span> <br /> <br />
-        Deg:<span>{Deg} </span> <br /> <br />
+        {
+           newHistory.map(item=>(
+             <>
+             <div className="text-center">
+            Name: <span>{item.name}</span> <br/>
+            Speed: <span>{item.speed}</span><br/>
+            Deg: <span>{item.deg}</span><br/>
+            time:<span>{item.time}</span>
+           
+            </div>
+            <hr/>
+         
+             </>
+           ))
+   
+         }
       </div>
    </div>
   )

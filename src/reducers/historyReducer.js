@@ -1,14 +1,14 @@
 import { GET_HISTORY } from "../constants/ActionTypes";
 
 const initialState={
-    data:[]
+    history:[]
 }
 
  const historyReducer=(state = initialState,action)=>{
     switch(action.type){
       case GET_HISTORY:return{
         ...state,
-        data:action.history
+        history:action.history
       }
       default:return state;
     }
