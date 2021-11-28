@@ -16,12 +16,10 @@ import { getHistory } from '../actions';
     const cityname=useSelector(state=>state.weatherReducer.cityName)
     const dispatch=useDispatch();
 
-
-    useEffect(()=>{
-
-   localStorage.setItem("history",JSON.stringify(history))
-
+   useEffect(()=>{
+      localStorage.setItem("history",JSON.stringify(history))
     },[history])
+    
     const submit=()=>{
       dispatch(getWeather(cityname));
       weather.map(ele=>{

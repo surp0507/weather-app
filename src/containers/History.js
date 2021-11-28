@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 export default function History() {
   const newHistory=JSON.parse(localStorage.getItem("history"));
-  console.log(newHistory)
-
 
   return (
     <div>
@@ -19,21 +17,18 @@ export default function History() {
       <hr/>
       <div classname="mx-auto">
         {
-           newHistory.map(item=>(
-             <>
-             <div className="text-center">
-            Name: <span>{item.name}</span> <br/>
-            Speed: <span>{item.speed}</span><br/>
-            Deg: <span>{item.deg}</span><br/>
-            time:<span>{item.time}</span>
-           
+        newHistory.map(item=>(
+          <>
+            <div className="text-center">
+              Name: <span>{item.name}</span> <br/>
+              Speed: <span>{item.speed}</span><br/>
+              Deg: <span>{item.deg}</span><br/>
+              time:<span>{item.time}</span>
             </div>
             <hr/>
-         
-             </>
+          </>
            ))
-   
-         }
+            }
       </div>
    </div>
   )
